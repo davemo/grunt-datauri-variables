@@ -1,0 +1,9 @@
+language: node_js
+node_js: 0.10
+install:
+  - "npm install -g grunt-cli"
+  - "npm install"
+  - "npm link"
+  - "cd example; npm link grunt-jasmine-bundle; npm install; cd .."
+script:
+  - "cd example; grunt"
