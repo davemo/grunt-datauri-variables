@@ -6,31 +6,41 @@
 # * Licensed under the MIT license.
 #
 
-fs     = require "fs"
-path   = require "path"
-_      = require "underscore"
+fs      = require("fs")
+path    = require("path")
+_       = require("underscore")
+datauri = require("datauri")
 
 "use strict"
 
 module.exports = (grunt) ->
 
-  grunt.registerMultiTask "grunt_datauri_variables", "Generates .scss datauri variables for .{png,gif,jpg} and .svg", ->
+  _.templateSettings = {interpolate : /\{\{(.+?)\}\}/g}
+  variableTemplate   = _.template('${{ varname }}: "{{base64_data}}";\n')
 
-    colors = @options(colors: undefined).colors
+  grunt.registerMultiTask "datauri", "Generates .scss datauri variables for .{png,gif,jpg} and .svg", ->
 
-    # _(@files).each (files) ->
+    options = @options
+      varPrefix: 'data-image-'
+      varSuffix: ''
 
-    #   src = files.src[0]
-    #   dest = files.dest
-    #   unless grunt.file.exists(src)
-    #     grunt.log.warn "Source file \"" + src + "\" not found."
-    #     return false
+    lines = []
 
-    #   content  = grunt.file.read(src)
+    _(@files).each (file) ->
+      [imageSources, dest] = [file.src, file.dest]
 
-    #   # grunt.file.write filename, content
-    #   grunt.log.writeln "read #{src} file"
-    #   # grunt.log.writeln "File #{filename} created."
+      _(imageSources).each (imagePath) ->
+        unless grunt.file.exists(imagePath)
+          grunt.log.warn "Source file \"" + imagePath + "\" not found."
+          return false
 
-    # fs.writeFileSync
-    grunt.log.writeln "done processing #{@files.length} images"
+        lines.push(
+          variableTemplate(
+            varname: "#{options.varPrefix}#{path.basename(imagePath).split('.')[0]}#{options.varSuffix}"
+            base64_data: datauri(imagePath)
+          )
+        )
+
+      grunt.file.write(dest, lines.join("\n"))
+      grunt.log.writeln "File #{dest} created."
+      grunt.log.writeln "done processing #{lines.length} images"
