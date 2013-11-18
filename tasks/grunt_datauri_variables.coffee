@@ -43,4 +43,4 @@ module.exports = (grunt) ->
 
       grunt.file.write(dest, lines.join("\n"))
       grunt.log.writeln "File #{dest} created."
-      grunt.log.writeln "done processing #{lines.length} images"
+      grunt.log.writeln "Encoded and inlined #{lines.length} images."

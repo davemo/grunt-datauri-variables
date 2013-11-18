@@ -30,5 +30,5 @@ describe "datauri", ->
   describe "generating the .scss variables file", ->
     Given (done) -> runGruntTask("datauri", @config, done)
     When -> @expected = read("spec/_expected_datauri_variables.scss")
-    When -> @actual = read("spec/tmp/_datauri_variables.scss")
+    When -> @actual   = read("spec/tmp/_datauri_variables.scss")
     Then -> @actual == @expected

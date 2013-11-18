@@ -26,20 +26,17 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-datauri-variables');
 ```
 
-## The "datauri_variables" task
+## The "datauri" task
 
 ### Overview
-In your project's Gruntfile, add a section named `datauri_variables` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `datauri` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  datauri_variables: {
+  datauri: {
     options: {
-      colors: {
-        red: "#FF0000",
-        green: "#00FF00",
-        blue: "#0000FF"
-      },
+      varPrefix: '', // defaults to `data-image-`
+      varSuffix: ''  // defaults to empty string
     },
     your_target: {
       files: {
@@ -53,20 +50,30 @@ grunt.initConfig({
 
 ### Sample Output
 
-Given the configuration in the Overview section above, you can expect `grunt datauri_variables` to output the following to `generated/_datauri_variables.scss`
+Given the configuration in the Overview section above, you can expect `grunt datauri` to output the following to `generated/_datauri_variables.scss` (lines truncated for brevity).
 
 ```shell
 cat generated/_datauri_variables.scss
 
+$data-image-alert: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...";
+$data-image-blurry: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA...";
+$data-image-circle: "data:image/gif;base64,R0lGODlhCwALAPEAAAAAA...";
+$data-image-truck: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj...";
 ```
 
 ### Options
 
-#### options.colors
-Type: `Object`
-Default value: undefined
+#### options.varPrefix
+Type: `string`
+Default value: `data-image-`
 
-A map of colors that will be used to generate color variants for .svg files
+A prefix prepended to the .scss variable name for the image.
+
+#### optins.varSuffix
+Type: `string`
+Default value: ''
+
+A suffix appended to the .scss variable name for the image.
 
 ## Running Specs
 
