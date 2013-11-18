@@ -7,7 +7,11 @@
 
 ## Intended Use
 
+Taking _small_ images and inlining base64 encoded versions of them in your stylesheets to avoid additional HTTP requests. This also allows you to eliminate image sprites from your workflow.
+
 ## Why would I use this?
+
+If you need a very small task with limited dependencies this task is for you. If you want more robust options you may want to check out [grunticon](https://github.com/filamentgroup/grunticon).
 
 ## How would I integrate this task?
 
@@ -17,7 +21,7 @@ This plugin requires Grunt `~0.4.1`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-datauri-variables --save-dev
+npm install grunt-datauri-variables --save
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
