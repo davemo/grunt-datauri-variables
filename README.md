@@ -13,8 +13,6 @@ Taking _small_ images and inlining base64 encoded versions of them in your style
 
 If you need a very small task with limited dependencies this task is for you. If you want more robust options you may want to check out [grunticon](https://github.com/filamentgroup/grunticon).
 
-## How would I integrate this task?
-
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
