@@ -7,7 +7,7 @@
 
 ## Intended Use
 
-Taking _small_ images and inlining base64 encoded versions of them in your stylesheets to avoid additional HTTP requests. This also allows you to eliminate image sprites from your workflow.
+Taking _small_ images and inlining base64 encoded versions of them in your stylesheets to avoid additional HTTP requests. This also allows you to eliminate image sprites from your workflow. We generate .scss variables so that users have the most flexible ability to integrate these base64 encoded images into their workflow; this also guarantees we won't unnecessarily bloat style sheets because .scss variables are not included in output `.css` by default.
 
 ## Why would I use this?
 
