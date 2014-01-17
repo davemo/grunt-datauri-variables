@@ -1,7 +1,7 @@
 {
   "name": "grunt-datauri-variables",
   "description": "Generates .scss datauri variables for .{png,gif,jpg} and .svg",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "https://github.com/davemo/grunt-datauri-variables",
   "author": {
     "name": "David Mosher",
