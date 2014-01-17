@@ -26,6 +26,11 @@ describe "datauri", ->
         sut:
           files:
             "tmp/_datauri_variables.scss": "fixtures/**/*.{png,jpg,gif,svg}"
+          options:
+            colors:
+              main: "red"
+              alt: "green"
+              header: "blue"
 
   describe "generating the .scss variables file", ->
     Given (done) -> runGruntTask("datauri", @config, done)
