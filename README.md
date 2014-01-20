@@ -39,7 +39,9 @@ grunt.initConfig({
     options: {
       varPrefix: '', // defaults to `data-image-`
       varSuffix: '', // defaults to empty string
-      colors: {      // a color mapping object that will map files named with `truck.colors-red-green.svg` into separate datauri vars.
+      colors: {      // a color mapping object that will map
+                     // files named with the following scheme
+                     // `truck.colors-red-green.svg` into separate datauri vars.
         red: '#00ffff',
         green: '#ff00ff'
       }
