@@ -38,7 +38,11 @@ grunt.initConfig({
   datauri: {
     options: {
       varPrefix: '', // defaults to `data-image-`
-      varSuffix: ''  // defaults to empty string
+      varSuffix: '', // defaults to empty string
+      colors: {      // a color mapping object that will map files named with `truck.colors-red-green.svg` into separate datauri vars.
+        red: '#00ffff',
+        green: '#ff00ff'
+      }
     },
     your_target: {
       files: {
@@ -61,6 +65,8 @@ $data-image-alert: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg...";
 $data-image-blurry: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAA...";
 $data-image-circle: "data:image/gif;base64,R0lGODlhCwALAPEAAAAAA...";
 $data-image-truck: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj...";
+$data-image-truck-red: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj...";
+$data-image-truck-green: "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj...";
 ```
 
 ### Options
@@ -76,6 +82,12 @@ Type: `string`
 Default value: ''
 
 A suffix appended to the .scss variable name for the image.
+
+#### options.colors
+Type: `object`
+Default value: undefined
+
+A map of color names and values to be used to auto generate color variants for flagged .svg files.
 
 ## Running Specs
 
