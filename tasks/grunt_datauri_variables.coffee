@@ -34,12 +34,26 @@ module.exports = (grunt) ->
     else
       colorObj
 
+  getStrokeConfig = (str) ->
+    strokes = str.match(/\.strokes\-([^\.]+)/i)
+    strokeObj = {}
+    if strokes
+      strokes = strokes[1].split("-")
+      strokes.forEach (stroke, i) ->
+        if isHex(stroke)
+          strokeObj[i] = "#" + stroke
+        else strokeObj[stroke] = stroke
+      strokeObj
+    else
+      strokeObj
+
   grunt.registerMultiTask "datauri", "Generates .scss datauri variables for .{png,gif,jpg} and .svg, and replaces color definitions in .svg files.", ->
 
     options = @options
       varPrefix: 'data-image-'
       varSuffix: ''
       colors: undefined
+      strokes: undefined
 
     lines = []
 
@@ -69,6 +83,21 @@ module.exports = (grunt) ->
             lines.push(
               variableTemplate(
                 varname: "#{options.varPrefix}#{path.basename(imagePath).split('.')[0]}#{options.varSuffix}-#{color}"
+                base64_data: "data:image/svg+xml;base64,#{new Buffer(colorizedSvgContents).toString('base64')}"
+              )
+            )
+
+        fileNameStrokes = getStrokeConfig(imagePath)
+
+        if _(fileNameStrokes).keys().length
+          _(_.keys(fileNameStrokes)).each (stroke) ->
+
+            svgContents = fs.readFileSync(imagePath).toString('utf-8');
+            colorizedSvgContents = svgContents.replace(/(<svg[^>]+>)/im, '$1<style type="text/css">circle, ellipse, line, path, polygon, polyline, rect, text { stroke: ' + options.strokes[stroke] + ' !important; }</style>' )
+
+            lines.push(
+              template(
+                varname: "#{options.varPrefix}#{path.basename(imagePath).split('.')[0]}#{options.varSuffix}-#{stroke}-stroke"
                 base64_data: "data:image/svg+xml;base64,#{new Buffer(colorizedSvgContents).toString('base64')}"
               )
             )
