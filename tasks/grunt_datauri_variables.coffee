@@ -17,6 +17,8 @@ module.exports = (grunt) ->
 
   _.templateSettings = {interpolate : /\{\{(.+?)\}\}/g}
   variableTemplate   = _.template('${{ varname }}: "{{base64_data}}";\n')
+  mapTemplate = _.template('${{ mapname }}: (\n{{ vars }}\n);\n')
+  mapVariableTemplate = _.template('{{ varname }}: "{{base64_data}}",')
 
   isHex = (val) ->
     (/^[0-9a-f]{3}(?:[0-9a-f]{3})?$/i).test val
@@ -40,6 +42,7 @@ module.exports = (grunt) ->
       varPrefix: 'data-image-'
       varSuffix: ''
       colors: undefined
+      useMap: false
 
     lines = []
 
@@ -51,8 +54,10 @@ module.exports = (grunt) ->
           grunt.log.warn "Source file \"" + imagePath + "\" not found."
           return false
 
+        template = if options.useMap then mapVariableTemplate else variableTemplate
+
         lines.push(
-          variableTemplate(
+          template(
             varname: "#{options.varPrefix}#{path.basename(imagePath).split('.')[0]}#{options.varSuffix}"
             base64_data: datauri(imagePath)
           )
@@ -67,12 +72,19 @@ module.exports = (grunt) ->
             colorizedSvgContents = svgContents.replace(/(<svg[^>]+>)/im, '$1<style type="text/css">circle, ellipse, line, path, polygon, polyline, rect, text { fill: ' + options.colors[color] + ' !important; }</style>' )
 
             lines.push(
-              variableTemplate(
+              template(
                 varname: "#{options.varPrefix}#{path.basename(imagePath).split('.')[0]}#{options.varSuffix}-#{color}"
                 base64_data: "data:image/svg+xml;base64,#{new Buffer(colorizedSvgContents).toString('base64')}"
               )
             )
 
-      grunt.file.write(dest, lines.join(""))
+      if options.useMap
+        grunt.file.write(dest, mapTemplate(
+          mapname: options.useMap
+          vars: lines.join("\n")
+        ))
+      else
+        grunt.file.write(dest, lines.join(""))
+
       grunt.log.writeln "File #{dest} created."
       grunt.log.writeln "Encoded and inlined #{lines.length} lines."
