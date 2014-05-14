@@ -91,6 +91,12 @@ Default value: undefined
 
 A map of color names and values to be used to auto generate color variants for flagged .svg files.
 
+#### options.useMap
+Type: `string`
+Default value: `false`
+
+When set, variables will be placed in to a [Sass map](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps) named by its value.
+
 ## Running Specs
 
 * clone this repo
