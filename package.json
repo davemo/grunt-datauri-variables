@@ -42,7 +42,7 @@
     "svg"
   ],
   "dependencies": {
-    "datauri": "0.5.5",
+    "datauri": "<0.8",
     "underscore": "~1.5.2"
   }
 }
