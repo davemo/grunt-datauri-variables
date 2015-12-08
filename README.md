@@ -48,8 +48,7 @@ grunt.initConfig({
     },
     your_target: {
       files: {
-        src: "images/**/*.{png,jpg,gif,svg}"
-        dest: "generated/_datauri_variables.scss"
+        "generated/_datauri_variables.scss": "images/**/*.{png,jpg,gif,svg}"
       }
     },
   },
