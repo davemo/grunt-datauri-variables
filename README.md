@@ -14,7 +14,7 @@ Taking _small_ images and inlining base64 encoded versions of them in your style
 If you need a very small task with limited dependencies this task is for you. If you want more robust options you may want to check out [grunticon](https://github.com/filamentgroup/grunticon).
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires Grunt `~1.4.1`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
