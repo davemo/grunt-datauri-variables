@@ -1,7 +1,6 @@
 # grunt-datauri-variables
 
-[![Build Status](https://travis-ci.org/davemo/grunt-datauri-variables.png?branch=master)](https://travis-ci.org/davemo/grunt-datauri-variables)
-
+[![Node.js CI](https://github.com/davemo/grunt-datauri-variables/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/davemo/grunt-datauri-variables/actions/workflows/node.js.yml)
 
 > Generates .scss datauri variables for .{png,gif,jpg} and .svg
 
