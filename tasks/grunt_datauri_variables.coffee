@@ -9,16 +9,19 @@
 fs      = require("fs")
 path    = require("path")
 datauri = require("datauri/sync")
-_       = require("underscore")
 
 "use strict"
 
 module.exports = (grunt) ->
 
-  _.templateSettings = {interpolate : /\{\{(.+?)\}\}/g}
-  variableTemplate   = _.template('${{ varname }}: "{{base64_data}}";\n')
-  mapTemplate = _.template('${{ mapname }}: (\n{{ vars }}\n);\n')
-  mapVariableTemplate = _.template('{{ varname }}: "{{base64_data}}",')
+  variableTemplate = ({varname, base64_data}) ->
+    "\$#{varname}: \"#{base64_data}\";\n"
+
+  mapTemplate = ({mapname, vars}) ->
+    "\$#{mapname}: (\n#{vars}\n);\n"
+
+  mapVariableTemplate = ({varname, base64_data}) ->
+    "#{varname}: \"#{base64_data}\","
 
   isHex = (val) ->
     (/^[0-9a-f]{3}(?:[0-9a-f]{3})?$/i).test val
@@ -46,10 +49,10 @@ module.exports = (grunt) ->
 
     lines = []
 
-    _(@files).each (file) ->
+    @files.forEach (file) ->
       [imageSources, dest] = [file.src, file.dest]
 
-      _(imageSources).each (imagePath) ->
+      imageSources.forEach (imagePath) ->
         unless grunt.file.exists(imagePath)
           grunt.log.warn "Source file \"" + imagePath + "\" not found."
           return false
@@ -65,9 +68,8 @@ module.exports = (grunt) ->
 
         fileNameColors = getColorConfig(imagePath)
 
-        if _(fileNameColors).keys().length
-          _(_.keys(fileNameColors)).each (color) ->
-
+        if Object.keys(fileNameColors).length
+          Object.keys(fileNameColors).forEach (color) ->
             svgContents = fs.readFileSync(imagePath).toString('utf-8');
             colorizedSvgContents = svgContents.replace(/(<svg[^>]+>)/im, '$1<style type="text/css">circle, ellipse, line, path, polygon, polyline, rect, text { fill: ' + options.colors[color] + ' !important; }</style>' )
 
