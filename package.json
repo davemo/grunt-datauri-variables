@@ -40,7 +40,6 @@
     "svg"
   ],
   "dependencies": {
-    "datauri": "^4.1.0",
-    "underscore": "^1.13.1"
+    "datauri": "^4.1.0"
   }
 }
