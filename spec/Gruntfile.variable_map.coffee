@@ -4,10 +4,11 @@ module.exports = (grunt) ->
 
   grunt.initConfig
     datauri:
-      sut:
+      variable_map_scenario:
         files:
           "tmp/_datauri_variables.scss": "fixtures/**/*.{png,jpg,gif,svg}"
         options:
+          useMap: "image-map"
           colors:
             main: "red"
             alt: "green"
