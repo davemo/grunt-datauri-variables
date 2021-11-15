@@ -28,11 +28,9 @@
     "test": "grunt spec"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-jasmine-bundle": "0.0.2"
-  },
-  "peerDependencies": {
-    "grunt": ">=0.4.0"
+    "coffeescript": "^2.6.1",
+    "grunt": "^1.4.1",
+    "grunt-jasmine-bundle": "^0.4.0"
   },
   "keywords": [
     "gruntplugin",
@@ -42,7 +40,7 @@
     "svg"
   ],
   "dependencies": {
-    "datauri": "<0.8",
-    "underscore": "~1.5.2"
+    "datauri": "^4.1.0",
+    "underscore": "^1.13.1"
   }
 }

@@ -8,8 +8,8 @@
 
 fs      = require("fs")
 path    = require("path")
+datauri = require("datauri/sync")
 _       = require("underscore")
-datauri = require("datauri")
 
 "use strict"
 
@@ -59,7 +59,7 @@ module.exports = (grunt) ->
         lines.push(
           template(
             varname: "#{options.varPrefix}#{path.basename(imagePath).split('.')[0]}#{options.varSuffix}"
-            base64_data: datauri(imagePath)
+            base64_data: datauri(imagePath).content
           )
         )
 
@@ -74,7 +74,7 @@ module.exports = (grunt) ->
             lines.push(
               template(
                 varname: "#{options.varPrefix}#{path.basename(imagePath).split('.')[0]}#{options.varSuffix}-#{color}"
-                base64_data: "data:image/svg+xml;base64,#{new Buffer(colorizedSvgContents).toString('base64')}"
+                base64_data: "data:image/svg+xml;base64,#{new Buffer.from(colorizedSvgContents).toString('base64')}"
               )
             )
 
